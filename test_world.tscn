@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://gytqdyhab7t5"]
+
+[ext_resource type="Texture2D" uid="uid://cc5wkuafw73ki" path="res://192x192.png" id="1_atpfd"]
+
+[node name="TestWorld" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="192x192" type="Sprite2D" parent="."]
+position = Vector2(889, 732)
+texture = ExtResource("1_atpfd")
