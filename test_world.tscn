@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://gytqdyhab7t5"]
+[gd_scene load_steps=3 format=3 uid="uid://gytqdyhab7t5"]
 
 [ext_resource type="Texture2D" uid="uid://cc5wkuafw73ki" path="res://192x192.png" id="1_atpfd"]
+[ext_resource type="Texture2D" uid="uid://co8ugilv1lmqs" path="res://bk3.png" id="1_m4b07"]
 
 [node name="TestWorld" type="Node2D"]
 
@@ -10,6 +11,10 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Bk3" type="Sprite2D" parent="."]
+position = Vector2(968, 538)
+texture = ExtResource("1_m4b07")
+
 [node name="192x192" type="Sprite2D" parent="."]
-position = Vector2(889, 732)
+position = Vector2(199, 757)
 texture = ExtResource("1_atpfd")
