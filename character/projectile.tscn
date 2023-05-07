@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://1wjodpbj0f4n"]
+
+[ext_resource type="Script" path="res://character/projectile_controller.gd" id="1_bmxww"]
+[ext_resource type="Texture2D" uid="uid://cssdg3gq4d1np" path="res://icon.svg" id="1_pwofk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5586y"]
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_bmxww")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.132813, 0.132813)
+texture = ExtResource("1_pwofk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5586y")
+
+[node name="Lifespan" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true

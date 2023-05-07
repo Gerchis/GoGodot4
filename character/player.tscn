@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0pui3n7koy48"]
+[gd_scene load_steps=5 format=3 uid="uid://b0pui3n7koy48"]
 
 [ext_resource type="Script" path="res://character/character_controller.gd" id="1_s4iwl"]
 [ext_resource type="Texture2D" uid="uid://cc5wkuafw73ki" path="res://192x192.png" id="2_8jyh8"]
+[ext_resource type="PackedScene" uid="uid://1wjodpbj0f4n" path="res://character/projectile.tscn" id="2_a3a2t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1yfuu"]
 radius = 32.0
@@ -9,6 +10,7 @@ height = 130.0
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_s4iwl")
+projectile_scene = ExtResource("2_a3a2t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_8jyh8")
@@ -24,3 +26,13 @@ one_shot = true
 [node name="CoyoteTime" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="ShootPointRight" type="Marker2D" parent="."]
+position = Vector2(46, -61)
+
+[node name="ShootPointLeft" type="Marker2D" parent="."]
+position = Vector2(-46, -61)
