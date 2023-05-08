@@ -1,13 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://gytqdyhab7t5"]
+[gd_scene load_steps=13 format=3 uid="uid://gytqdyhab7t5"]
 
 [ext_resource type="Texture2D" uid="uid://co8ugilv1lmqs" path="res://bk3.png" id="1_m4b07"]
 [ext_resource type="PackedScene" uid="uid://b0pui3n7koy48" path="res://character/player.tscn" id="2_mnxcp"]
+[ext_resource type="Texture2D" uid="uid://cihjxv7j5vrin" path="res://Animation_Spritesheet_Idle_001.png" id="3_f6jt8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bbe7"]
 size = Vector2(1491, 229)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51f0h"]
 size = Vector2(646, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axan3"]
+atlas = ExtResource("3_f6jt8")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aumrb"]
+atlas = ExtResource("3_f6jt8")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjvgi"]
+atlas = ExtResource("3_f6jt8")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62i6h"]
+atlas = ExtResource("3_f6jt8")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46wqk"]
+atlas = ExtResource("3_f6jt8")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shlbm"]
+atlas = ExtResource("3_f6jt8")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8p3rn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axan3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aumrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjvgi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62i6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46wqk")
+}, {
+"duration": 1.1,
+"texture": SubResource("AtlasTexture_shlbm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
 
 [node name="TestWorld" type="Node2D"]
 
@@ -34,3 +85,9 @@ one_way_collision = true
 
 [node name="player" parent="." instance=ExtResource("2_mnxcp")]
 position = Vector2(133, 724)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(700, 304)
+sprite_frames = SubResource("SpriteFrames_8p3rn")
+autoplay = "default"
+frame_progress = 0.211646

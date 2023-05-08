@@ -1,22 +1,74 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0pui3n7koy48"]
+[gd_scene load_steps=13 format=3 uid="uid://b0pui3n7koy48"]
 
 [ext_resource type="Script" path="res://character/character_controller.gd" id="1_s4iwl"]
 [ext_resource type="Texture2D" uid="uid://cc5wkuafw73ki" path="res://192x192.png" id="2_8jyh8"]
 [ext_resource type="PackedScene" uid="uid://1wjodpbj0f4n" path="res://character/projectile.tscn" id="2_a3a2t"]
+[ext_resource type="Texture2D" uid="uid://cihjxv7j5vrin" path="res://Animation_Spritesheet_Idle_001.png" id="4_pglxf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1yfuu"]
-radius = 32.0
-height = 130.0
+radius = 46.0
+height = 160.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axan3"]
+atlas = ExtResource("4_pglxf")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aumrb"]
+atlas = ExtResource("4_pglxf")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjvgi"]
+atlas = ExtResource("4_pglxf")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62i6h"]
+atlas = ExtResource("4_pglxf")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46wqk"]
+atlas = ExtResource("4_pglxf")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shlbm"]
+atlas = ExtResource("4_pglxf")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_af0r8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axan3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aumrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjvgi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62i6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46wqk")
+}, {
+"duration": 1.1,
+"texture": SubResource("AtlasTexture_shlbm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_s4iwl")
 projectile_scene = ExtResource("2_a3a2t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_8jyh8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 32)
+position = Vector2(-1, 15)
 shape = SubResource("CapsuleShape2D_1yfuu")
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
@@ -36,3 +88,8 @@ position = Vector2(46, -61)
 
 [node name="ShootPointLeft" type="Marker2D" parent="."]
 position = Vector2(-46, -61)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(18, 0)
+sprite_frames = SubResource("SpriteFrames_af0r8")
+autoplay = "default"
