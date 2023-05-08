@@ -27,7 +27,8 @@ var enable_movement := true
 @onready var shoot_point_right := $ShootPointRight
 @onready var shoot_point_left := $ShootPointLeft
 @onready var fire_rate := $FireRate
-@onready var sprite := $Sprite2D
+@onready var sprite := $CharacterSprite
+@onready var animation_controller := $CharacterSprite/AnimationTree
 
 func _ready():
 	jump_buffer_timer.timeout.connect(discard_jump_input)
@@ -36,6 +37,8 @@ func _ready():
 
 func _process(delta):
 	movement_direction = 0.0 
+	
+	handle_animations()
 	
 	if enable_movement:
 		get_movement_input()
@@ -137,3 +140,7 @@ func face_direction():
 
 func unfreeze():
 	enable_movement = true
+
+func handle_animations():
+	animation_controller.set("parameters/conditions/jump",is_jumping)
+	animation_controller.set("parameters/conditions/idle",!is_jumping)
