@@ -21,6 +21,9 @@ var is_falling : bool :
 	get: return velocity.y > 0
 var jumps_done := 0
 var enable_movement := true
+var sprite_offset := Vector2.ZERO
+
+var touching_lader : Area2D
 
 @onready var jump_buffer_timer := $JumpBufferTimer
 @onready var coyote_time := $CoyoteTime
@@ -34,6 +37,7 @@ func _ready():
 	jump_buffer_timer.timeout.connect(discard_jump_input)
 	coyote_time.timeout.connect(coyote_timeout)
 	fire_rate.timeout.connect(unfreeze)
+	sprite_offset = sprite.offset
 
 func _process(delta):
 	movement_direction = 0.0 
@@ -135,8 +139,10 @@ func shoot():
 func face_direction():
 	if movement_direction > 0:
 		sprite.set_flip_h(false)
+		sprite.offset.x = sprite_offset.x
 	if movement_direction < 0:
 		sprite.set_flip_h(true)
+		sprite.offset.x = -sprite_offset.x
 
 func unfreeze():
 	enable_movement = true
@@ -144,3 +150,7 @@ func unfreeze():
 func handle_animations():
 	animation_controller.set("parameters/conditions/jump",is_jumping)
 	animation_controller.set("parameters/conditions/idle",!is_jumping)
+
+func handle_lader():
+	if touching_lader:
+		

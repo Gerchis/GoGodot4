@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://i0lybx6yks17"]
+
+[ext_resource type="Script" path="res://WorldProps/lader.gd" id="1_d6sa0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7hdo"]
+size = Vector2(20, 198)
+
+[node name="Lader" type="Area2D"]
+script = ExtResource("1_d6sa0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v7hdo")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
