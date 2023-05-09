@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://gytqdyhab7t5"]
+[gd_scene load_steps=7 format=3 uid="uid://gytqdyhab7t5"]
 
-[ext_resource type="Texture2D" uid="uid://co8ugilv1lmqs" path="res://bk3.png" id="1_m4b07"]
+[ext_resource type="Texture2D" uid="uid://cgnttgjgqmrxs" path="res://SegundoPlano.png" id="1_611uf"]
 [ext_resource type="PackedScene" uid="uid://b0pui3n7koy48" path="res://character/player.tscn" id="2_mnxcp"]
-[ext_resource type="PackedScene" uid="uid://i0lybx6yks17" path="res://WorldProps/lader.tscn" id="3_n1otl"]
+[ext_resource type="Texture2D" uid="uid://b2osmfo516ydj" path="res://PrimerPlano.png" id="3_6e180"]
+[ext_resource type="PackedScene" uid="uid://2q6frjqxgpgj" path="res://WorldProps/ladder.tscn" id="4_cupi0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bbe7"]
-size = Vector2(1491, 229)
+size = Vector2(1491, 139.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51f0h"]
 size = Vector2(646, 50)
@@ -14,48 +15,36 @@ size = Vector2(646, 50)
 
 [node name="Bk3" type="Sprite2D" parent="."]
 position = Vector2(968, 538)
-texture = ExtResource("1_m4b07")
+texture = ExtResource("1_611uf")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Bk3"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bk3/StaticBody2D"]
-position = Vector2(-222.5, 433)
+position = Vector2(-222.5, 477.75)
 shape = SubResource("RectangleShape2D_4bbe7")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Bk3/StaticBody2D"]
-position = Vector2(567, 616)
+position = Vector2(648, 612)
 shape = SubResource("RectangleShape2D_4bbe7")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Bk3"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bk3/StaticBody2D2"]
-position = Vector2(-64, 118)
-shape = SubResource("RectangleShape2D_51f0h")
-one_way_collision = true
-
-[node name="Bk4" type="Sprite2D" parent="."]
-position = Vector2(968, 538)
-texture = ExtResource("1_m4b07")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Bk4"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bk4/StaticBody2D"]
-position = Vector2(-222.5, 433)
-shape = SubResource("RectangleShape2D_4bbe7")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bk4/StaticBody2D"]
-position = Vector2(567, 616)
-shape = SubResource("RectangleShape2D_4bbe7")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Bk4"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bk4/StaticBody2D2"]
-position = Vector2(-64, 118)
+position = Vector2(335, -195)
 shape = SubResource("RectangleShape2D_51f0h")
 one_way_collision = true
 
 [node name="player" parent="." instance=ExtResource("2_mnxcp")]
 position = Vector2(133, 724)
 
-[node name="Lader" parent="." instance=ExtResource("3_n1otl")]
-position = Vector2(1381, 791)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(968, 538)
+texture = ExtResource("3_6e180")
+
+[node name="Lader" parent="." instance=ExtResource("4_cupi0")]
+position = Vector2(1330, 852)
+
+[node name="CollisionShape2D" parent="Lader" index="0"]
+position = Vector2(-28, -328)
+
+[editable path="Lader"]

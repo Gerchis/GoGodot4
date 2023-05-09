@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name CharacterController
 
 const MAX_GRAVITY = 2000
 
@@ -13,6 +14,8 @@ const MAX_GRAVITY = 2000
 @export_range(0, 1.0) var min_jump_force := 0.5
 @export_category("ProjectileSettings")
 @export var projectile_scene : PackedScene
+@export_category("LadderSettings")
+@export var ladder_speed := 300.0
 
 var movement_direction := 0.0
 var stored_jump := false
@@ -23,7 +26,8 @@ var jumps_done := 0
 var enable_movement := true
 var sprite_offset := Vector2.ZERO
 
-var touching_lader : Area2D
+var touching_ladder : Area2D
+var in_ladder := false
 
 @onready var jump_buffer_timer := $JumpBufferTimer
 @onready var coyote_time := $CoyoteTime
@@ -47,20 +51,18 @@ func _process(delta):
 	if enable_movement:
 		get_movement_input()
 		get_jump_input()
-	
-	if enable_movement:
 		face_direction()
+		handle_lader()
 	
 	shoot()
 
 func _physics_process(delta):
-	calculate_gravity(delta)
 	
-	calculate_movement(delta)
-	
-	apply_jump()
-	
-	jump_check()
+	if !in_ladder:
+		calculate_gravity(delta)
+		calculate_movement(delta)
+		apply_jump()
+		jump_check()
 	
 	move_and_slide()
 
@@ -149,8 +151,25 @@ func unfreeze():
 
 func handle_animations():
 	animation_controller.set("parameters/conditions/jump",is_jumping)
-	animation_controller.set("parameters/conditions/idle",!is_jumping)
+	animation_controller.set("parameters/conditions/idle",!is_jumping and velocity.x == 0)
+	animation_controller.set("parameters/conditions/walk",!is_jumping and velocity.x != 0)
 
 func handle_lader():
-	if touching_lader:
+	if touching_ladder and (Input.is_action_pressed("up") or Input.is_action_pressed("down")) and !in_ladder:
+		in_ladder = true
+		global_transform.origin.x = touching_ladder.global_transform.origin.x
+		velocity.x = 0
+		jumps_done = 0
+	
+	if in_ladder:
+		var vertical_input = 0
+		if Input.is_action_pressed("up"):
+			vertical_input += 1
+		if Input.is_action_pressed("down"):
+			vertical_input -= 1
 		
+		velocity.y = -vertical_input * ladder_speed
+		
+		if stored_jump or !touching_ladder:
+			in_ladder = false
+
