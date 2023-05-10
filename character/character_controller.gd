@@ -28,6 +28,7 @@ var sprite_offset := Vector2.ZERO
 
 var touching_ladder : Area2D
 var in_ladder := false
+var drop_down := false
 
 @onready var jump_buffer_timer := $JumpBufferTimer
 @onready var coyote_time := $CoyoteTime
@@ -36,6 +37,7 @@ var in_ladder := false
 @onready var fire_rate := $FireRate
 @onready var sprite := $CharacterSprite
 @onready var animation_controller := $CharacterSprite/AnimationTree
+@onready var ladder_block := $LadderBlock
 
 func _ready():
 	jump_buffer_timer.timeout.connect(discard_jump_input)
@@ -53,6 +55,7 @@ func _process(delta):
 		get_jump_input()
 		face_direction()
 		handle_lader()
+		handle_collision()
 	
 	shoot()
 
@@ -88,9 +91,14 @@ func calculate_gravity(_delta):
 	velocity.y = min(velocity.y, MAX_GRAVITY)
 
 func get_jump_input():
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and !Input.is_action_pressed("down"):
 		stored_jump = true
 		jump_buffer_timer.start()
+	
+	if Input.is_action_pressed("jump") and Input.is_action_pressed("down"):
+		drop_down = true
+	elif drop_down:
+		drop_down = false
 
 func apply_jump():
 	if stored_jump and jumps_done < jumps_availables:
@@ -155,7 +163,7 @@ func handle_animations():
 	animation_controller.set("parameters/conditions/walk",!is_jumping and velocity.x != 0)
 
 func handle_lader():
-	if touching_ladder and (Input.is_action_pressed("up") or Input.is_action_pressed("down")) and !in_ladder:
+	if touching_ladder and (Input.is_action_pressed("up") or Input.is_action_pressed("down")) and !in_ladder and ladder_block.is_stopped():
 		in_ladder = true
 		global_transform.origin.x = touching_ladder.global_transform.origin.x
 		velocity.x = 0
@@ -172,4 +180,10 @@ func handle_lader():
 		
 		if stored_jump or !touching_ladder:
 			in_ladder = false
+			ladder_block.start()
 
+func handle_collision():
+	if drop_down:
+		set_collision_mask_value(2,false)
+	else:
+		set_collision_mask_value(2,true)

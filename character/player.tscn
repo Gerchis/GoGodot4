@@ -332,7 +332,7 @@ projectile_scene = ExtResource("2_a3a2t")
 [node name="CharacterSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6pqm8")
 animation = &"Idle"
-offset = Vector2(22, 0)
+offset = Vector2(8.862, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterSprite"]
 libraries = {
@@ -364,8 +364,12 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="LadderBlock" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [node name="ShootPointRight" type="Marker2D" parent="."]
-position = Vector2(76, -66)
+position = Vector2(72, -75)
 
 [node name="ShootPointLeft" type="Marker2D" parent="."]
-position = Vector2(-76, -66)
+position = Vector2(-72, -75)

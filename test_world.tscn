@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=3 uid="uid://gytqdyhab7t5"]
+[gd_scene load_steps=14 format=3 uid="uid://gytqdyhab7t5"]
 
-[ext_resource type="Texture2D" uid="uid://cmwmsx4j7q4ud" path="res://SegundoPlano.png" id="1_611uf"]
 [ext_resource type="Texture2D" uid="uid://cy68kg4wm8ve8" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Fondo.png" id="1_xctlj"]
 [ext_resource type="PackedScene" uid="uid://b0pui3n7koy48" path="res://character/player.tscn" id="2_mnxcp"]
 [ext_resource type="Texture2D" uid="uid://c4lgp514ovpc2" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Nubes.png" id="2_tmr4v"]
@@ -9,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://2q6frjqxgpgj" path="res://Escenario_Tutorial/ladder.tscn" id="4_cupi0"]
 [ext_resource type="Texture2D" uid="uid://c0biacamwwik4" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Niebla.png" id="4_ecm07"]
 [ext_resource type="Texture2D" uid="uid://d2pxmabmwhc3k" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_SegundoPlano.png" id="5_vlop2"]
+[ext_resource type="Texture2D" uid="uid://s8um0pb7r75i" path="res://Escenario_Tutorial/Escenario_Interior/Escenario_002_SegundoPlano.png" id="10_kmyof"]
+[ext_resource type="Texture2D" uid="uid://cah65px0icplf" path="res://Escenario_Tutorial/Escenario_Interior/Escenario_002_TercerPlano.png" id="10_potlr"]
+[ext_resource type="Texture2D" uid="uid://dhb0nrgy8tfpr" path="res://Escenario_Tutorial/Escenario_Interior/Escenario_002_PrimerPlano.png" id="11_wglwn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bbe7"]
 size = Vector2(1491, 139.5)
@@ -18,59 +20,79 @@ size = Vector2(646, 50)
 
 [node name="TestWorld" type="Node2D"]
 
-[node name="Escenario001Fondo" type="Sprite2D" parent="."]
-position = Vector2(961, 542)
-texture = ExtResource("1_xctlj")
-
-[node name="Escenario001Nubes" type="Sprite2D" parent="."]
-position = Vector2(961, 542)
-texture = ExtResource("2_tmr4v")
-
-[node name="Escenario001TercerPlano" type="Sprite2D" parent="."]
-position = Vector2(963, 541)
-texture = ExtResource("3_iwql8")
-
-[node name="Escenario001Niebla" type="Sprite2D" parent="."]
-position = Vector2(966, 536)
-texture = ExtResource("4_ecm07")
-
 [node name="Escenario001SegundoPlano" type="Sprite2D" parent="."]
 position = Vector2(961, 538)
 texture = ExtResource("5_vlop2")
 
-[node name="Bk3" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(968, 538)
-texture = ExtResource("1_611uf")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Bk3"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bk3/StaticBody2D"]
-position = Vector2(-222.5, 477.75)
-shape = SubResource("RectangleShape2D_4bbe7")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bk3/StaticBody2D"]
-position = Vector2(648, 612)
-shape = SubResource("RectangleShape2D_4bbe7")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Bk3"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bk3/StaticBody2D2"]
-position = Vector2(335, -195)
-shape = SubResource("RectangleShape2D_51f0h")
-one_way_collision = true
-
 [node name="player" parent="." instance=ExtResource("2_mnxcp")]
 position = Vector2(133, 724)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+offset = Vector2(0, -300)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(968, 538)
 texture = ExtResource("3_6e180")
 
 [node name="Lader" parent="." instance=ExtResource("4_cupi0")]
-position = Vector2(1330, 852)
+position = Vector2(1302, 621)
 
-[node name="CollisionShape2D" parent="Lader" index="0"]
-position = Vector2(-28, -328)
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[editable path="Lader"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.4, 1)
+
+[node name="Escenario001Fondo" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(961, 542)
+texture = ExtResource("1_xctlj")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 1)
+
+[node name="Escenario001Nubes" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(961, 542)
+texture = ExtResource("2_tmr4v")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 1)
+
+[node name="Escenario001TercerPlano" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(963, 541)
+texture = ExtResource("3_iwql8")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Escenario001Niebla" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(966, 536)
+texture = ExtResource("4_ecm07")
+
+[node name="Escenario002TercerPlano" type="Sprite2D" parent="."]
+position = Vector2(-1874, 688)
+texture = ExtResource("10_potlr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Escenario002TercerPlano"]
+texture = ExtResource("10_kmyof")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Escenario002TercerPlano/Sprite2D"]
+texture = ExtResource("11_wglwn")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(968, 538)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-222.5, 477.75)
+shape = SubResource("RectangleShape2D_4bbe7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(648, 612)
+shape = SubResource("RectangleShape2D_4bbe7")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(968, 538)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(335, -195)
+shape = SubResource("RectangleShape2D_51f0h")
+one_way_collision = true
