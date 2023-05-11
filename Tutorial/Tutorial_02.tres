@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomData" load_steps=2 format=3 uid="uid://cparainnswpgq"]
+
+[ext_resource type="Script" path="res://Resources/RoomData.gd" id="1_lhnsd"]
+
+[resource]
+script = ExtResource("1_lhnsd")
+top_limit = 0.0
+bot_limit = 2150.0
+right_limit = -1400.0
+left_limit = -6100.0

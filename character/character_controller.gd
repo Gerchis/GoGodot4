@@ -48,8 +48,6 @@ func _ready():
 func _process(delta):
 	movement_direction = 0.0 
 	
-	handle_animations()
-	
 	if enable_movement:
 		get_movement_input()
 		get_jump_input()
@@ -58,6 +56,8 @@ func _process(delta):
 		handle_collision()
 	
 	shoot()
+	
+	handle_animations()
 
 func _physics_process(delta):
 	
@@ -69,7 +69,7 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
-func get_movement_input():	
+func get_movement_input():
 	if Input.is_action_pressed("right"):
 		movement_direction += 1.0
 	if Input.is_action_pressed("left"):
@@ -132,7 +132,10 @@ func shoot():
 		fire_rate.start()
 		
 		var origin_point = shoot_point_left.global_position if sprite.is_flipped_h()  else shoot_point_right.global_position
-		var aim_point = get_viewport().get_mouse_position()
+		var aim_point = get_global_mouse_position()
+		
+		print(origin_point)
+		print(aim_point)
 		
 		var projectile_direction = (aim_point - origin_point).normalized()
 		#projectile_direction.x = min(projectile_direction.x, 0) if sprite.is_flipped_h() else max(projectile_direction.x, 0)
@@ -159,8 +162,8 @@ func unfreeze():
 
 func handle_animations():
 	animation_controller.set("parameters/conditions/jump",is_jumping)
-	animation_controller.set("parameters/conditions/idle",!is_jumping and velocity.x == 0)
-	animation_controller.set("parameters/conditions/walk",!is_jumping and velocity.x != 0)
+	animation_controller.set("parameters/conditions/idle",!is_jumping and movement_direction == 0)
+	animation_controller.set("parameters/conditions/walk",!is_jumping and movement_direction != 0)
 
 func handle_lader():
 	if touching_ladder and (Input.is_action_pressed("up") or Input.is_action_pressed("down")) and !in_ladder and ladder_block.is_stopped():

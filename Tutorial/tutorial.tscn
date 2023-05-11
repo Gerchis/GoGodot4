@@ -1,0 +1,126 @@
+[gd_scene load_steps=15 format=3 uid="uid://c512iyvl8ummb"]
+
+[ext_resource type="Texture2D" uid="uid://cy68kg4wm8ve8" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Fondo.png" id="1_kehpu"]
+[ext_resource type="Texture2D" uid="uid://c4lgp514ovpc2" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Nubes.png" id="2_w5dgc"]
+[ext_resource type="Texture2D" uid="uid://6767aeaou6df" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_TercerPlano.png" id="3_2cq11"]
+[ext_resource type="Texture2D" uid="uid://c0biacamwwik4" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Niebla.png" id="4_j7pnr"]
+[ext_resource type="Texture2D" uid="uid://d2pxmabmwhc3k" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_SegundoPlano.png" id="5_kv3kc"]
+[ext_resource type="Texture2D" uid="uid://b2osmfo516ydj" path="res://PrimerPlano.png" id="6_kbicy"]
+[ext_resource type="PackedScene" uid="uid://b0pui3n7koy48" path="res://character/player.tscn" id="7_1tqpp"]
+[ext_resource type="Texture2D" uid="uid://cssdg3gq4d1np" path="res://icon.svg" id="7_uuy5i"]
+[ext_resource type="PackedScene" uid="uid://b47hxip7pjiqu" path="res://Assets/Swaper.tscn" id="9_6usxv"]
+[ext_resource type="Resource" uid="uid://cparainnswpgq" path="res://Tutorial/Tutorial_02.tres" id="9_qkoak"]
+[ext_resource type="Resource" uid="uid://bjelbb2nxkv38" path="res://Tutorial/Tutorial_01.tres" id="10_1ksom"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8e5m"]
+size = Vector2(2761, 208)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwroq"]
+size = Vector2(169, 1106)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rc6m1"]
+size = Vector2(4798, 308)
+
+[node name="Tutorial" type="Node2D"]
+metadata/_edit_vertical_guides_ = [-6104.0, -1401.0]
+
+[node name="Sala01" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Sala01"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Sala01/ParallaxBackground"]
+motion_scale = Vector2(0.4, 1)
+
+[node name="Escenario001Fondo" type="Sprite2D" parent="Sala01/ParallaxBackground/ParallaxLayer"]
+position = Vector2(961, 542)
+texture = ExtResource("1_kehpu")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Sala01/ParallaxBackground"]
+motion_scale = Vector2(0.6, 1)
+
+[node name="Escenario001Nubes" type="Sprite2D" parent="Sala01/ParallaxBackground/ParallaxLayer2"]
+position = Vector2(961, 542)
+texture = ExtResource("2_w5dgc")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Sala01/ParallaxBackground"]
+motion_scale = Vector2(0.8, 1)
+
+[node name="Escenario001TercerPlano" type="Sprite2D" parent="Sala01/ParallaxBackground/ParallaxLayer3"]
+position = Vector2(963, 541)
+texture = ExtResource("3_2cq11")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="Sala01/ParallaxBackground"]
+
+[node name="Escenario001Niebla" type="Sprite2D" parent="Sala01/ParallaxBackground/ParallaxLayer4"]
+position = Vector2(966, 536)
+texture = ExtResource("4_j7pnr")
+
+[node name="Escenario001SegundoPlano" type="Sprite2D" parent="Sala01"]
+position = Vector2(961, 538)
+texture = ExtResource("5_kv3kc")
+
+[node name="EscenearioSuelo" type="Sprite2D" parent="Sala01/Escenario001SegundoPlano"]
+z_index = 10
+texture = ExtResource("6_kbicy")
+
+[node name="Puerta" type="Sprite2D" parent="Sala01/Escenario001SegundoPlano"]
+z_index = 10
+position = Vector2(-931.5, 121)
+scale = Vector2(1.57031, 5.07813)
+texture = ExtResource("7_uuy5i")
+
+[node name="EnvironmentCollisions" type="StaticBody2D" parent="Sala01"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sala01/EnvironmentCollisions"]
+position = Vector2(943.5, 1050)
+shape = SubResource("RectangleShape2D_v8e5m")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sala01/EnvironmentCollisions"]
+position = Vector2(2003.5, 533)
+shape = SubResource("RectangleShape2D_vwroq")
+
+[node name="PlayerSpawn" type="Marker2D" parent="Sala01"]
+position = Vector2(291, 879)
+
+[node name="Swaper" parent="Sala01" node_paths=PackedStringArray("new_spawn") instance=ExtResource("9_6usxv")]
+position = Vector2(16, 235)
+new_room = ExtResource("9_qkoak")
+new_spawn = NodePath("../../Sala02/PlayerSpawn")
+
+[node name="Sala02" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sala02"]
+position = Vector2(-3749, 1084.5)
+scale = Vector2(36.7656, 16.7891)
+texture = ExtResource("7_uuy5i")
+
+[node name="EvironmentCollision" type="StaticBody2D" parent="Sala02"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sala02/EvironmentCollision"]
+position = Vector2(-3731, 2017)
+shape = SubResource("RectangleShape2D_rc6m1")
+
+[node name="PlayerSpawn" type="Marker2D" parent="Sala02"]
+position = Vector2(-1922, 1763)
+
+[node name="Swaper" parent="Sala02" node_paths=PackedStringArray("new_spawn") instance=ExtResource("9_6usxv")]
+position = Vector2(-1496, 1142)
+new_room = ExtResource("10_1ksom")
+new_spawn = NodePath("../../Sala01/PlayerSpawn")
+
+[node name="player" parent="." instance=ExtResource("7_1tqpp")]
+position = Vector2(1800, 833)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080
+drag_horizontal_enabled = true
+
+[node name="Transition" type="Sprite2D" parent="player/Camera2D"]
+modulate = Color(0, 0, 0, 0)
+z_index = 100
+scale = Vector2(50, 50)
+texture = ExtResource("7_uuy5i")
+metadata/_edit_lock_ = true

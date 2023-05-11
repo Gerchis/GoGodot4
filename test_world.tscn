@@ -28,7 +28,9 @@ texture = ExtResource("5_vlop2")
 position = Vector2(133, 724)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-offset = Vector2(0, -300)
+limit_left = 0
+limit_bottom = 1080
+drag_horizontal_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(968, 538)
@@ -84,7 +86,7 @@ position = Vector2(-222.5, 477.75)
 shape = SubResource("RectangleShape2D_4bbe7")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(648, 612)
+position = Vector2(656, 605)
 shape = SubResource("RectangleShape2D_4bbe7")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
