@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://gytqdyhab7t5"]
+[gd_scene load_steps=15 format=3 uid="uid://gytqdyhab7t5"]
 
 [ext_resource type="Texture2D" uid="uid://cy68kg4wm8ve8" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Fondo.png" id="1_xctlj"]
 [ext_resource type="PackedScene" uid="uid://b0pui3n7koy48" path="res://character/player.tscn" id="2_mnxcp"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://s8um0pb7r75i" path="res://Escenario_Tutorial/Escenario_Interior/Escenario_002_SegundoPlano.png" id="10_kmyof"]
 [ext_resource type="Texture2D" uid="uid://cah65px0icplf" path="res://Escenario_Tutorial/Escenario_Interior/Escenario_002_TercerPlano.png" id="10_potlr"]
 [ext_resource type="Texture2D" uid="uid://dhb0nrgy8tfpr" path="res://Escenario_Tutorial/Escenario_Interior/Escenario_002_PrimerPlano.png" id="11_wglwn"]
+[ext_resource type="Texture2D" uid="uid://du7aeq3ncd20y" path="res://Assets_Dungeon_001/Assets_Dungeon_001.png" id="12_nl1ur"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bbe7"]
 size = Vector2(1491, 139.5)
@@ -45,7 +46,7 @@ position = Vector2(1302, 621)
 motion_scale = Vector2(0.4, 1)
 
 [node name="Escenario001Fondo" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(961, 542)
+position = Vector2(972, 517)
 texture = ExtResource("1_xctlj")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -98,3 +99,9 @@ collision_mask = 2
 position = Vector2(335, -195)
 shape = SubResource("RectangleShape2D_51f0h")
 one_way_collision = true
+
+[node name="AssetsDungeon001" type="Sprite2D" parent="."]
+position = Vector2(475, 964)
+texture = ExtResource("12_nl1ur")
+region_enabled = true
+region_rect = Rect2(2235, 1519, 954, 252)
