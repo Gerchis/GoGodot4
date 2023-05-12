@@ -55,8 +55,6 @@ func _process(delta):
 		handle_lader()
 		handle_collision()
 	
-	shoot()
-	
 	handle_animations()
 
 func _physics_process(delta):
@@ -128,26 +126,20 @@ func coyote_timeout():
 	jumps_done += 1
 
 func shoot():
-	if Input.is_action_pressed("shoot") and fire_rate.is_stopped() and is_on_floor():
-		fire_rate.start()
-		
-		var origin_point = shoot_point_left.global_position if sprite.is_flipped_h()  else shoot_point_right.global_position
-		var aim_point = get_global_mouse_position()
-		
-		print(origin_point)
-		print(aim_point)
-		
-		var projectile_direction = (aim_point - origin_point).normalized()
-		#projectile_direction.x = min(projectile_direction.x, 0) if sprite.is_flipped_h() else max(projectile_direction.x, 0)
-		
-		var projectile = projectile_scene.instantiate()
-		projectile.set_as_top_level(true)
-		projectile.global_position = origin_point
-		projectile.initial_direction = projectile_direction
-		add_child(projectile)
-		
-		enable_movement = false
-		stored_jump = false
+	fire_rate.start()
+	
+	var origin_point = shoot_point_left.global_position if sprite.is_flipped_h()  else shoot_point_right.global_position
+	var aim_point = get_global_mouse_position()
+	
+	var projectile_direction = (aim_point - origin_point).normalized()
+	#projectile_direction.x = min(projectile_direction.x, 0) if sprite.is_flipped_h() else max(projectile_direction.x, 0)
+	
+	var projectile = projectile_scene.instantiate()
+	projectile.set_as_top_level(true)
+	projectile.global_position = origin_point
+	projectile.initial_direction = projectile_direction
+	add_child(projectile)
+
 
 func face_direction():
 	if movement_direction > 0:
@@ -157,13 +149,28 @@ func face_direction():
 		sprite.set_flip_h(true)
 		sprite.offset.x = -sprite_offset.x
 
+func freeze():
+	enable_movement = false
+	stored_jump = false
+
 func unfreeze():
 	enable_movement = true
 
 func handle_animations():
-	animation_controller.set("parameters/conditions/jump",is_jumping)
-	animation_controller.set("parameters/conditions/idle",!is_jumping and movement_direction == 0)
-	animation_controller.set("parameters/conditions/walk",!is_jumping and movement_direction != 0)
+	var jump = is_jumping
+	var idle = !is_jumping and movement_direction == 0
+	var walk = !is_jumping and movement_direction != 0
+	var jump_apex = is_falling and is_jumping
+	var attack = false
+	
+	if Input.is_action_pressed("shoot") and fire_rate.is_stopped() and is_on_floor():
+		attack = true
+	
+	animation_controller.set("parameters/conditions/jump",jump)
+	animation_controller.set("parameters/conditions/jump_apex", jump_apex)
+	animation_controller.set("parameters/conditions/idle", idle)
+	animation_controller.set("parameters/conditions/walk", walk)
+	animation_controller.set("parameters/conditions/attack", attack)
 
 func handle_lader():
 	if touching_ladder and (Input.is_action_pressed("up") or Input.is_action_pressed("down")) and !in_ladder and ladder_block.is_stopped():
