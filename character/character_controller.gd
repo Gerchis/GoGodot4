@@ -142,7 +142,7 @@ func shoot():
 	projectile.set_as_top_level(true)
 	projectile.global_position = origin_point
 	projectile.initial_direction = projectile_direction
-	projectile.get_child(3).look_at(projectile_direction)
+	projectile.get_child(3).rotate((-projectile_direction).angle())
 	add_child(projectile)
 	
 	var particles_pos = init_floor_particles_offset if sprite.is_flipped_h() else -init_floor_particles_offset

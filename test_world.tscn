@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gytqdyhab7t5"]
+[gd_scene load_steps=28 format=3 uid="uid://gytqdyhab7t5"]
 
 [ext_resource type="Texture2D" uid="uid://cy68kg4wm8ve8" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Fondo.png" id="1_xctlj"]
 [ext_resource type="PackedScene" uid="uid://b0pui3n7koy48" path="res://character/player.tscn" id="2_mnxcp"]
@@ -12,12 +12,93 @@
 [ext_resource type="Texture2D" uid="uid://cah65px0icplf" path="res://Escenario_Tutorial/Escenario_Interior/Escenario_002_TercerPlano.png" id="10_potlr"]
 [ext_resource type="Texture2D" uid="uid://dhb0nrgy8tfpr" path="res://Escenario_Tutorial/Escenario_Interior/Escenario_002_PrimerPlano.png" id="11_wglwn"]
 [ext_resource type="Texture2D" uid="uid://du7aeq3ncd20y" path="res://Assets_Dungeon_001/Assets_Dungeon_001.png" id="12_nl1ur"]
+[ext_resource type="Texture2D" uid="uid://bt63nivp8o72t" path="res://Animations_Characters_13_05_2023/Diabolo/Animation_Walk_Diabolo_001.png" id="13_68ta3"]
+[ext_resource type="Texture2D" uid="uid://cjfr7imu0oedk" path="res://Animations_Characters_13_05_2023/Skeleton/Animation_Walk_Skeleton_001.png" id="14_xa4ef"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bbe7"]
 size = Vector2(1491, 139.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51f0h"]
 size = Vector2(646, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3j5xd"]
+atlas = ExtResource("13_68ta3")
+region = Rect2(0, 0, 454, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mn62d"]
+atlas = ExtResource("13_68ta3")
+region = Rect2(454, 0, 454, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s65ed"]
+atlas = ExtResource("13_68ta3")
+region = Rect2(908, 0, 454, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtd0k"]
+atlas = ExtResource("13_68ta3")
+region = Rect2(1362, 0, 454, 384)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0b2h3"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_3j5xd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mn62d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s65ed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtd0k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mihr8"]
+atlas = ExtResource("14_xa4ef")
+region = Rect2(0, 0, 454, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brxlx"]
+atlas = ExtResource("14_xa4ef")
+region = Rect2(454, 0, 454, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opwdt"]
+atlas = ExtResource("14_xa4ef")
+region = Rect2(908, 0, 454, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrp27"]
+atlas = ExtResource("14_xa4ef")
+region = Rect2(1362, 0, 454, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi0lf"]
+atlas = ExtResource("14_xa4ef")
+region = Rect2(1816, 0, 454, 384)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tpmei"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_mihr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brxlx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opwdt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrp27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yi0lf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="TestWorld" type="Node2D"]
 
@@ -27,6 +108,14 @@ texture = ExtResource("5_vlop2")
 
 [node name="player" parent="." instance=ExtResource("2_mnxcp")]
 position = Vector2(133, 724)
+max_speed = 500.0
+accel = 1500.0
+friction = 3000.0
+gravity = 1700.0
+jump_force = 900.0
+jumps_availables = 1
+min_jump_force = 0.5
+ladder_speed = 300.0
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 limit_left = 0
@@ -105,3 +194,15 @@ position = Vector2(475, 964)
 texture = ExtResource("12_nl1ur")
 region_enabled = true
 region_rect = Rect2(2235, 1519, 954, 252)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(827, 648)
+sprite_frames = SubResource("SpriteFrames_0b2h3")
+autoplay = "default"
+frame_progress = 0.76564
+flip_h = true
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(678, 649)
+sprite_frames = SubResource("SpriteFrames_tpmei")
+autoplay = "default"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c512iyvl8ummb"]
+[gd_scene load_steps=18 format=3 uid="uid://c512iyvl8ummb"]
 
 [ext_resource type="Texture2D" uid="uid://cy68kg4wm8ve8" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Fondo.png" id="1_kehpu"]
 [ext_resource type="Texture2D" uid="uid://c4lgp514ovpc2" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Nubes.png" id="2_w5dgc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d2pxmabmwhc3k" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_SegundoPlano.png" id="5_kv3kc"]
 [ext_resource type="Texture2D" uid="uid://b2osmfo516ydj" path="res://PrimerPlano.png" id="6_kbicy"]
 [ext_resource type="PackedScene" uid="uid://b0pui3n7koy48" path="res://character/player.tscn" id="7_1tqpp"]
+[ext_resource type="Texture2D" uid="uid://cj2inw23ux7in" path="res://Animations_Characters_13_05_2023/Escenario_Puerta_Cortada_001.png" id="7_8jon5"]
 [ext_resource type="Texture2D" uid="uid://cssdg3gq4d1np" path="res://icon.svg" id="7_uuy5i"]
 [ext_resource type="PackedScene" uid="uid://b47hxip7pjiqu" path="res://Assets/Swaper.tscn" id="9_6usxv"]
 [ext_resource type="Resource" uid="uid://cparainnswpgq" path="res://Tutorial/Tutorial_02.tres" id="9_qkoak"]
@@ -66,10 +67,8 @@ z_index = 10
 texture = ExtResource("6_kbicy")
 
 [node name="Puerta" type="Sprite2D" parent="Sala01/Escenario001SegundoPlano"]
-z_index = 10
-position = Vector2(-931.5, 121)
-scale = Vector2(1.57031, 5.07813)
-texture = ExtResource("7_uuy5i")
+z_index = 5
+texture = ExtResource("7_8jon5")
 
 [node name="EnvironmentCollisions" type="StaticBody2D" parent="Sala01"]
 
@@ -121,6 +120,14 @@ position = Vector2(0, -281)
 
 [node name="player" parent="." instance=ExtResource("7_1tqpp")]
 position = Vector2(1800, 833)
+max_speed = 500.0
+accel = 1500.0
+friction = 3000.0
+gravity = 1700.0
+jump_force = 900.0
+jumps_availables = 1
+min_jump_force = 0.5
+ladder_speed = 300.0
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 limit_left = 0

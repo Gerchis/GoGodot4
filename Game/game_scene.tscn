@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://df38o012g2rf7"]
+
+[ext_resource type="Texture2D" uid="uid://6xvu72fkl720" path="res://Assets_Dungeon_12_05_2023/Assets_Dungeon_001.png" id="1_cxhdv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ptnh"]
+size = Vector2(2810, 646)
+
+[node name="GameScene" type="Node2D"]
+
+[node name="Room0" type="Node2D" parent="."]
+
+[node name="Floor1" type="Sprite2D" parent="Room0"]
+position = Vector2(493, 1937)
+texture = ExtResource("1_cxhdv")
+region_enabled = true
+region_rect = Rect2(94, 1605, 978, 762)
+
+[node name="Floor2" type="Sprite2D" parent="Room0"]
+position = Vector2(1442, 1937)
+texture = ExtResource("1_cxhdv")
+region_enabled = true
+region_rect = Rect2(1163, 1605, 954, 762)
+
+[node name="Floor3" type="Sprite2D" parent="Room0"]
+position = Vector2(2337, 1937)
+texture = ExtResource("1_cxhdv")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(1163, 1605, 954, 762)
+
+[node name="EnvironmentCollisions" type="StaticBody2D" parent="Room0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Room0/EnvironmentCollisions"]
+position = Vector2(1409, 1879)
+shape = SubResource("RectangleShape2D_8ptnh")

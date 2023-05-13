@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://character/character_controller.gd" id="1_s4iwl"]
 [ext_resource type="PackedScene" uid="uid://1wjodpbj0f4n" path="res://character/projectile.tscn" id="2_a3a2t"]
 [ext_resource type="Texture2D" uid="uid://c5l0kyb5d8awx" path="res://Assets_Dungeon_12_05_2023/Animation_Attack_001.png" id="3_nrnlc"]
-[ext_resource type="Texture2D" uid="uid://ch2xvy18lu3vl" path="res://Assets_Dungeon_12_05_2023/Animation_Idle_002.png" id="3_we04y"]
+[ext_resource type="Texture2D" uid="uid://dp7gavx1b3lq0" path="res://Animations_Characters_13_05_2023/Animation_Idle_003.png" id="4_1vr3r"]
 [ext_resource type="Texture2D" uid="uid://c04ecqvb8ugxy" path="res://Assets_Dungeon_12_05_2023/Animation_Jump_002.png" id="4_fkv0h"]
-[ext_resource type="Texture2D" uid="uid://b5ry2a443futq" path="res://SpriteSheet_Walk_001.png" id="5_41wk4"]
+[ext_resource type="Texture2D" uid="uid://dnvldqh5eeqpi" path="res://Animations_Characters_13_05_2023/Animation_Walk_001.png" id="6_a6a8l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yi768"]
 atlas = ExtResource("3_nrnlc")
@@ -15,20 +15,20 @@ region = Rect2(0, 0, 192, 192)
 atlas = ExtResource("3_nrnlc")
 region = Rect2(192, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3uof2"]
-atlas = ExtResource("3_we04y")
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxpb0"]
+atlas = ExtResource("4_1vr3r")
 region = Rect2(0, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rfqjp"]
-atlas = ExtResource("3_we04y")
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5162"]
+atlas = ExtResource("4_1vr3r")
 region = Rect2(192, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hnn3r"]
-atlas = ExtResource("3_we04y")
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ee8y"]
+atlas = ExtResource("4_1vr3r")
 region = Rect2(384, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vlkyx"]
-atlas = ExtResource("3_we04y")
+[sub_resource type="AtlasTexture" id="AtlasTexture_px5w1"]
+atlas = ExtResource("4_1vr3r")
 region = Rect2(576, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kbwnl"]
@@ -59,17 +59,17 @@ region = Rect2(960, 0, 192, 192)
 atlas = ExtResource("4_fkv0h")
 region = Rect2(1152, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vil4k"]
-atlas = ExtResource("5_41wk4")
-region = Rect2(0, 0, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pamio"]
+atlas = ExtResource("6_a6a8l")
+region = Rect2(0, 0, 193, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eov7w"]
-atlas = ExtResource("5_41wk4")
-region = Rect2(192, 0, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qa245"]
+atlas = ExtResource("6_a6a8l")
+region = Rect2(193, 0, 193, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jj3nl"]
-atlas = ExtResource("5_41wk4")
-region = Rect2(384, 0, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_mb1vw"]
+atlas = ExtResource("6_a6a8l")
+region = Rect2(386, 0, 193, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6pqm8"]
 animations = [{
@@ -86,16 +86,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3uof2")
+"texture": SubResource("AtlasTexture_lxpb0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rfqjp")
+"texture": SubResource("AtlasTexture_f5162")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hnn3r")
+"texture": SubResource("AtlasTexture_7ee8y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vlkyx")
+"texture": SubResource("AtlasTexture_px5w1")
 }],
 "loop": true,
 "name": &"Idle",
@@ -129,13 +129,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vil4k")
+"texture": SubResource("AtlasTexture_pamio")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eov7w")
+"texture": SubResource("AtlasTexture_qa245")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jj3nl")
+"texture": SubResource("AtlasTexture_mb1vw")
 }],
 "loop": true,
 "name": &"Walk",
@@ -446,15 +446,7 @@ colors = PackedColorArray(0.972549, 0.933333, 0.815686, 1, 0.972549, 0.933333, 0
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_s4iwl")
-max_speed = null
-accel = null
-friction = null
-gravity = null
-jump_force = null
-jumps_availables = null
-min_jump_force = null
 projectile_scene = ExtResource("2_a3a2t")
-ladder_speed = null
 
 [node name="CharacterSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6pqm8")
