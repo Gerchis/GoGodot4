@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciiaqmnvn1yrw"]
+
+[ext_resource type="Script" path="res://Assets/item_orb.gd" id="1_8crfa"]
+[ext_resource type="Texture2D" uid="uid://6xvu72fkl720" path="res://Assets_Dungeon_12_05_2023/Assets_Dungeon_001.png" id="2_w0com"]
+[ext_resource type="Script" path="res://Assets/CollisionCulling.gd" id="3_uucfb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0qnn"]
+radius = 74.4312
+
+[node name="ItemOrb" type="Area2D" groups=["hitable"]]
+script = ExtResource("1_8crfa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_w0com")
+region_enabled = true
+region_rect = Rect2(1184, 525, 144, 138)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r0qnn")
+
+[node name="CollisionCulling" type="VisibleOnScreenNotifier2D" parent="CollisionShape2D"]
+position = Vector2(-0.5, -7.62939e-06)
+scale = Vector2(7.65, 7.7)
+script = ExtResource("3_uucfb")
+
+[connection signal="screen_entered" from="CollisionShape2D/CollisionCulling" to="CollisionShape2D/CollisionCulling" method="_on_screen_entered"]
+[connection signal="screen_exited" from="CollisionShape2D/CollisionCulling" to="CollisionShape2D/CollisionCulling" method="_on_screen_exited"]

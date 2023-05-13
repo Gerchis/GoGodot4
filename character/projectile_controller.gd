@@ -1,7 +1,9 @@
 extends Area2D
 
 @export_category("ProjectileSettings")
-@export var projectile_speed := 800.0
+@export var projectile_speed := 1200.0
+
+var damage
 
 var initial_direction := Vector2.ZERO
 
@@ -15,3 +17,14 @@ func _physics_process(delta):
 
 func kill_projectile():
 	queue_free()
+
+func _on_area_entered(area):
+	if area.is_in_group("hitable"):
+		area.recive_hit(damage)
+		for prticles in $Particulas.get_children():
+			prticles.restart()
+			$Icon.hide()
+			$CollisionShape2D.set_disabled(true)
+
+
+

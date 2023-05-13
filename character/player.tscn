@@ -147,9 +147,57 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_vi5hq"]
+resource_name = "Attack"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"freeze"
+}, {
+"args": [],
+"method": &"shoot"
+}, {
+"args": [],
+"method": &"unfreeze"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_y0oj0"]
 resource_name = "Idle"
-length = 0.6
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -171,7 +219,7 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -292,55 +340,6 @@ tracks/1/keys = {
 "values": [0, 1, 2]
 }
 
-[sub_resource type="Animation" id="Animation_vi5hq"]
-resource_name = "Attack"
-length = 0.5
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Attack"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("..")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"values": [{
-"args": [],
-"method": &"freeze"
-}, {
-"args": [],
-"method": &"shoot"
-}, {
-"args": [],
-"method": &"unfreeze"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s1hym"]
 _data = {
 "Attack": SubResource("Animation_vi5hq"),
@@ -436,27 +435,26 @@ graph_offset = Vector2(46, -81)
 radius = 46.0
 height = 160.0
 
-[sub_resource type="Gradient" id="Gradient_pfdwj"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="Gradient" id="Gradient_0e5cv"]
+colors = PackedColorArray(0.270588, 0.207843, 0.337255, 1, 0.270588, 0.207843, 0.337255, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_imgpv"]
-gradient = SubResource("Gradient_pfdwj")
+[sub_resource type="Gradient" id="Gradient_5sjce"]
+colors = PackedColorArray(0.364706, 0.196078, 0.278431, 1, 0.364706, 0.196078, 0.278431, 0)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v5ho6"]
-resource_local_to_scene = true
-lifetime_randomness = 1.0
-particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
-gravity = Vector3(0, 98, 0)
-initial_velocity_min = 100.0
-initial_velocity_max = 100.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-color_ramp = SubResource("GradientTexture1D_imgpv")
+[sub_resource type="Gradient" id="Gradient_ywggl"]
+colors = PackedColorArray(0.972549, 0.933333, 0.815686, 1, 0.972549, 0.933333, 0.815686, 0)
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_s4iwl")
+max_speed = null
+accel = null
+friction = null
+gravity = null
+jump_force = null
+jumps_availables = null
+min_jump_force = null
 projectile_scene = ExtResource("2_a3a2t")
+ladder_speed = null
 
 [node name="CharacterSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6pqm8")
@@ -472,6 +470,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="CharacterSprite"]
 tree_root = SubResource("AnimationNodeStateMachine_rwpqw")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_otyje")
 parameters/conditions/attack = false
 parameters/conditions/idle = false
@@ -505,7 +504,61 @@ position = Vector2(80, -50)
 [node name="ShootPointLeft" type="Marker2D" parent="."]
 position = Vector2(-80, -50)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_v5ho6")
-trail_enabled = true
+[node name="FloorPrticles" type="Marker2D" parent="."]
+position = Vector2(-62, 95)
+
+[node name="GPUParticles2D" type="CPUParticles2D" parent="FloorPrticles"]
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 0.9
+lifetime_randomness = 1.0
+fixed_fps = 30
+draw_order = 1
+particle_flag_align_y = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 600)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+scale_amount_min = 6.0
+scale_amount_max = 6.0
+color_ramp = SubResource("Gradient_0e5cv")
+metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D3" type="CPUParticles2D" parent="FloorPrticles"]
+emitting = false
+amount = 10
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.9
+lifetime_randomness = 1.0
+fixed_fps = 30
+draw_order = 1
+particle_flag_align_y = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 600)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+scale_amount_min = 6.0
+scale_amount_max = 6.0
+color_ramp = SubResource("Gradient_5sjce")
+metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D2" type="CPUParticles2D" parent="FloorPrticles"]
+emitting = false
+amount = 10
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.9
+lifetime_randomness = 1.0
+fixed_fps = 30
+draw_order = 1
+particle_flag_align_y = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 600)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+scale_amount_min = 6.0
+scale_amount_max = 6.0
+color_ramp = SubResource("Gradient_ywggl")
+metadata/_edit_lock_ = true

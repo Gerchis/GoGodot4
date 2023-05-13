@@ -1,11 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://1wjodpbj0f4n"]
+[gd_scene load_steps=7 format=3 uid="uid://1wjodpbj0f4n"]
 
 [ext_resource type="Script" path="res://character/projectile_controller.gd" id="1_bmxww"]
 [ext_resource type="Texture2D" uid="uid://cssdg3gq4d1np" path="res://icon.svg" id="1_pwofk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5586y"]
 
+[sub_resource type="Gradient" id="Gradient_22d88"]
+offsets = PackedFloat32Array(0.0108696, 1)
+colors = PackedColorArray(0.270588, 0.207843, 0.337255, 1, 0.270588, 0.207843, 0.337255, 0)
+
+[sub_resource type="Gradient" id="Gradient_v60n2"]
+offsets = PackedFloat32Array(0.0108696, 1)
+colors = PackedColorArray(0.980392, 0.952941, 0.831373, 1, 0.980392, 0.952941, 0.831373, 0)
+
+[sub_resource type="Gradient" id="Gradient_22xri"]
+offsets = PackedFloat32Array(0.0108696, 1)
+colors = PackedColorArray(0.364706, 0.196078, 0.278431, 1, 0.364706, 0.196078, 0.278431, 0)
+
 [node name="Projectile" type="Area2D"]
+show_behind_parent = true
 script = ExtResource("1_bmxww")
 
 [node name="Icon" type="Sprite2D" parent="."]
@@ -19,3 +32,59 @@ shape = SubResource("CircleShape2D_5586y")
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="Particulas" type="Node2D" parent="."]
+
+[node name="GPUParticles2D" type="CPUParticles2D" parent="Particulas"]
+emitting = false
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.9
+fixed_fps = 30
+draw_order = 1
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 120.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+scale_amount_min = 6.0
+scale_amount_max = 6.0
+color_ramp = SubResource("Gradient_22d88")
+
+[node name="GPUParticles2D3" type="CPUParticles2D" parent="Particulas"]
+emitting = false
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.9
+fixed_fps = 30
+draw_order = 1
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 120.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+scale_amount_min = 6.0
+scale_amount_max = 6.0
+color_ramp = SubResource("Gradient_v60n2")
+
+[node name="GPUParticles2D2" type="CPUParticles2D" parent="Particulas"]
+emitting = false
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.9
+fixed_fps = 30
+draw_order = 1
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 120.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+scale_amount_min = 6.0
+scale_amount_max = 6.0
+color_ramp = SubResource("Gradient_22xri")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

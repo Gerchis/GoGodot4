@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c512iyvl8ummb"]
+[gd_scene load_steps=17 format=3 uid="uid://c512iyvl8ummb"]
 
 [ext_resource type="Texture2D" uid="uid://cy68kg4wm8ve8" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Fondo.png" id="1_kehpu"]
 [ext_resource type="Texture2D" uid="uid://c4lgp514ovpc2" path="res://Escenario_Tutorial/Escenario_Exterior/Escenario_001_Nubes.png" id="2_w5dgc"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://b47hxip7pjiqu" path="res://Assets/Swaper.tscn" id="9_6usxv"]
 [ext_resource type="Resource" uid="uid://cparainnswpgq" path="res://Tutorial/Tutorial_02.tres" id="9_qkoak"]
 [ext_resource type="Resource" uid="uid://bjelbb2nxkv38" path="res://Tutorial/Tutorial_01.tres" id="10_1ksom"]
+[ext_resource type="Texture2D" uid="uid://6xvu72fkl720" path="res://Assets_Dungeon_12_05_2023/Assets_Dungeon_001.png" id="11_712lg"]
+[ext_resource type="PackedScene" uid="uid://ciiaqmnvn1yrw" path="res://Assets/item_orb.tscn" id="12_y5447"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8e5m"]
 size = Vector2(2761, 208)
@@ -107,6 +109,15 @@ position = Vector2(-1922, 1763)
 position = Vector2(-1496, 1142)
 new_room = ExtResource("10_1ksom")
 new_spawn = NodePath("../../Sala01/PlayerSpawn")
+
+[node name="Columna" type="Sprite2D" parent="Sala02"]
+position = Vector2(-4186, 1659)
+texture = ExtResource("11_712lg")
+region_enabled = true
+region_rect = Rect2(1196, 675, 126, 408)
+
+[node name="ItemOrb" parent="Sala02/Columna" instance=ExtResource("12_y5447")]
+position = Vector2(0, -281)
 
 [node name="player" parent="." instance=ExtResource("7_1tqpp")]
 position = Vector2(1800, 833)

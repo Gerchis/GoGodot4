@@ -30,6 +30,8 @@ var touching_ladder : Area2D
 var in_ladder := false
 var drop_down := false
 
+var init_floor_particles_offset : float
+
 @onready var jump_buffer_timer := $JumpBufferTimer
 @onready var coyote_time := $CoyoteTime
 @onready var shoot_point_right := $ShootPointRight
@@ -38,12 +40,14 @@ var drop_down := false
 @onready var sprite := $CharacterSprite
 @onready var animation_controller := $CharacterSprite/AnimationTree
 @onready var ladder_block := $LadderBlock
+@onready var floor_particles := $FloorPrticles
 
 func _ready():
 	jump_buffer_timer.timeout.connect(discard_jump_input)
 	coyote_time.timeout.connect(coyote_timeout)
 	fire_rate.timeout.connect(unfreeze)
 	sprite_offset = sprite.offset
+	init_floor_particles_offset = floor_particles.position.x
 
 func _process(delta):
 	movement_direction = 0.0 
@@ -138,7 +142,14 @@ func shoot():
 	projectile.set_as_top_level(true)
 	projectile.global_position = origin_point
 	projectile.initial_direction = projectile_direction
+	projectile.get_child(3).look_at(projectile_direction)
 	add_child(projectile)
+	
+	var particles_pos = init_floor_particles_offset if sprite.is_flipped_h() else -init_floor_particles_offset
+	floor_particles.position.x = particles_pos
+	
+	for particles in floor_particles.get_children():
+		particles.restart()
 
 
 func face_direction():
